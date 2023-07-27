@@ -64,3 +64,44 @@ service ExpenseService {
   rpc update (Expense) returns (Expense);
   rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
 }
+
+// Paycheck
+message Paychecks {
+  repeated Paycheck paycheck = 1;
+}
+message Paycheck {
+  string id = 1;
+  string budgetId = 2;
+  string title = 3;
+  float annualGross = 4;
+  int32 frequency = 5; 
+}
+service PaycheckService {
+  rpc findById (google.protobuf.StringValue) returns (Paycheck);
+  rpc findByBudgetId (google.protobuf.StringValue) returns (stream Paycheck);
+  rpc create (Paycheck) returns (Paycheck);
+  rpc update (Paycheck) returns (Paycheck);
+  rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
+}
+
+// Deduction
+message Deductions {
+  repeated Deduction deduction = 1;
+}
+message Deduction {
+  string id = 1;
+  string paycheckId = 2;
+  string title = 3;
+  float amount = 4;
+  int32 calculateOn = 5;
+  int32 taxableType = 6;
+  int32 position = 7;
+  bool enabled = 8;
+}
+service DeductionService {
+  rpc findById (google.protobuf.StringValue) returns (Deduction);
+  rpc findByPaycheckId (google.protobuf.StringValue) returns (stream Deduction);
+  rpc create (Deduction) returns (Deduction);
+  rpc update (Deduction) returns (Deduction);
+  rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
+}
