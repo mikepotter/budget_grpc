@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.Type;
 
+import xyz.potter.showcase.budget.proto.Expense.Quadrant;
+import xyz.potter.showcase.budget.proto.CalculateOn;
+
 @Entity(name = "expense")
 public class ExpenseEntity {
     @Id
@@ -18,12 +21,12 @@ public class ExpenseEntity {
     private UUID categoryId;
 
     private String title;
-    private Integer quadrant;
+    private Quadrant quadrant;
 	  private boolean fixed;
 	  private float low;
 	  private float high;
     private float amount;
-    private Integer calculateOn;
+    private CalculateOn calculateOn;
     private boolean enabled;
     private Integer position;
 
@@ -41,10 +44,10 @@ public class ExpenseEntity {
        enabled = e;
     }
 
-    public Integer getCalculateOn() {
+    public CalculateOn getCalculateOn() {
       return calculateOn;
     }
-    public void setCalculateOn(Integer c) {
+    public void setCalculateOn(CalculateOn c) {
       calculateOn = c;
     }
 
@@ -55,10 +58,10 @@ public class ExpenseEntity {
       amount = a;
     }
 
-    public Integer getQuadrant() {
+    public Quadrant getQuadrant() {
       return quadrant ;
     }
-    public void setQuadrant(Integer q) {
+    public void setQuadrant(Quadrant q) {
       quadrant = q;
     }
 

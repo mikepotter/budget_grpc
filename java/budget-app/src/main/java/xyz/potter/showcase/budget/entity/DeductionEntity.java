@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Type;
 
 import xyz.potter.showcase.budget.proto.Deduction.TaxableType;
+import xyz.potter.showcase.budget.proto.CalculateOn;
 
 @Entity(name = "deduction")
 public class DeductionEntity {
@@ -21,7 +22,7 @@ public class DeductionEntity {
 
     private String title;
     private float amount;
-    private Integer calculateOn;
+    private CalculateOn calculateOn;
     private TaxableType taxableType;
     private Integer position;
     private boolean enabled;
@@ -61,10 +62,10 @@ public class DeductionEntity {
        enabled = e;
     }
 
-    public Integer getCalculateOn() {
+    public CalculateOn getCalculateOn() {
       return calculateOn;
     }
-    public void setCalculateOn(Integer c) {
+    public void setCalculateOn(CalculateOn c) {
       calculateOn = c;
     }
 

@@ -7,6 +7,14 @@ option java_multiple_files = true;
 option java_package = "xyz.potter.showcase.budget.proto";
 option java_outer_classname = "BudgetProto";
 
+enum CalculateOn {
+  PER_PAYCHECK = 0;
+	MONTHLY_AMOUNT = 1;
+	ANNUAL_AMOUNT = 2;
+	PERCENT_NET = 3;
+	PERCENT_GROSS = 4;
+}
+
 // Budget
 message Budgets {
   repeated Budget budget = 1;
@@ -45,15 +53,22 @@ message Expenses {
   repeated Expense expense = 1;
 }
 message Expense {
+  enum Quadrant {
+    Q1_NON_NEGOTIABLE = 0;
+    Q2_IMPORTANT_NOT_URGENT = 1;
+    Q3_NEGOTIABLE = 2;
+    Q4_PURELY_DISCRETIONARY = 3;
+  }
+
   string id = 1;
   string categoryId = 2;
-  int32 quadrant = 3;
+  Quadrant quadrant = 3;
   bool fixed = 4;
   string title = 5;
   float high = 6;
   float low = 7;
   float amount = 8;
-  int32 calculateOn = 9;
+  CalculateOn calculateOn = 9;
   bool enabled = 10;
   int32 position = 11;
 }
@@ -70,11 +85,17 @@ message Paychecks {
   repeated Paycheck paycheck = 1;
 }
 message Paycheck {
+  enum Frequency {
+    WEEKLY = 0;
+    BIWEEKLY = 1;
+    TWICE_MONTHLY = 2;
+    MONTHLY = 3;
+  }
   string id = 1;
   string budgetId = 2;
   string title = 3;
   float annualGross = 4;
-  int32 frequency = 5; 
+  Frequency frequency = 5; 
 }
 service PaycheckService {
   rpc findById (google.protobuf.StringValue) returns (Paycheck);
@@ -90,16 +111,16 @@ message Deductions {
 }
 message Deduction {
   enum TaxableType {
-    TAXABLE_TYPE_FULLY = 0;
-    TAXABLE_TYPE_OSADI = 1;
-    TAXABLE_TYPE_NON = 2;
+    FULLY_TAXABLE = 0;
+    OSADI_TAXABLE = 1;
+    NON_TAXABLE = 2;
   }
 
   string id = 1;
   string paycheckId = 2;
   string title = 3;
   float amount = 4;
-  int32 calculateOn = 5;
+  CalculateOn calculateOn = 5;
   TaxableType taxableType = 6;
   int32 position = 7;
   bool enabled = 8;

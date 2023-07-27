@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.Type;
 
+import xyz.potter.showcase.budget.proto.Paycheck.Frequency;
+
 @Entity(name = "paycheck")
 public class PaycheckEntity {
     @Id
@@ -18,7 +20,7 @@ public class PaycheckEntity {
     private UUID budgetId;
     private String title;
     private float annualGross;
-    private int frequency;
+    private Frequency frequency;
 
     public UUID getId() {
       return id;
@@ -48,10 +50,10 @@ public class PaycheckEntity {
       annualGross = amount;
     }
 
-    public int getFrequency() {
+    public Frequency getFrequency() {
       return frequency;
     }
-    public void setFrequency(int f) {
+    public void setFrequency(Frequency f) {
       frequency = f;
     }     
     

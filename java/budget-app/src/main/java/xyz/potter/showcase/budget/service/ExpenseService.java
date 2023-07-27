@@ -42,7 +42,6 @@ public class ExpenseService {
     }
   }
 
- 
   public Iterator<Expense> findByCategoryId(String categoryId) {
     Iterator<ExpenseEntity> entityIterator = expenseJpaRepository.findByCategoryId(UUID.fromString(categoryId)).iterator();
 
