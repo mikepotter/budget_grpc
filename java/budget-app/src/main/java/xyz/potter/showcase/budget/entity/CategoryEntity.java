@@ -13,6 +13,8 @@ public class CategoryEntity {
     @GeneratedValue
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
+    
+    @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID budgetId;
     private String title;
 

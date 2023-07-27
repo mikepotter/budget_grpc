@@ -23,7 +23,7 @@ management:
 
 spring:
   application:
-    name: dataservice
+    name: budget
   profiles:
     active: @spring.profiles.active@
 
@@ -48,7 +48,7 @@ spring:
 spring:
   profiles: compose
   datasource:
-    url: jdbc:mysql://mysql.potter.local:3306/dataservice?createDatabaseIfNotExist=true
+    url: jdbc:mysql://mysql.potter.local:3306/budget?createDatabaseIfNotExist=true
     username: root
     password: 
   jpa:

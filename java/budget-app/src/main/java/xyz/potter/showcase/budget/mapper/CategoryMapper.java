@@ -12,6 +12,7 @@ public class CategoryMapper {
     }
 
     protoBuilder.setTitle(entity.getTitle());
+    protoBuilder.setBudgetId(entity.getBudgetId().toString());
   }
 
   public static void protoToEntity(Category proto, CategoryEntity entity) {

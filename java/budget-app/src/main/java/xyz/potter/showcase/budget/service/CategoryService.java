@@ -10,9 +10,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import xyz.potter.showcase.budget.entity.BudgetEntity;
 import xyz.potter.showcase.budget.entity.CategoryEntity;
-import xyz.potter.showcase.budget.mapper.BudgetMapper;
 import xyz.potter.showcase.budget.mapper.CategoryMapper;
 import xyz.potter.showcase.budget.proto.Category;
 import xyz.potter.showcase.budget.repository.jpa.CategoryJpaRepository;

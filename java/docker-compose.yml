@@ -2,7 +2,6 @@ version: "3.9"
 
 services:
   budget:
-    container_name: "budget"
     hostname: "budget.potter.local"
     image: "potter/budget:0.1.0-SNAPSHOT"
     environment:
@@ -11,6 +10,11 @@ services:
       - "8080:8080"
       - "8081:8081"
       - "8082:8082"
+    depends_on:
+      redis:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
   mysql:
     hostname: "mysql.potter.local"
     image: "mysql:8.0.32"
@@ -18,11 +22,19 @@ services:
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      start_period: 5s
+      interval: 10s
   redis:
     hostname: "redis.potter.local"
     image: "redis:7.0.8"
     ports:
       - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      start_period: 5s
+      interval: 10s
 networks:
   default:
     driver: bridge

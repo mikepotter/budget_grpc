@@ -7,16 +7,14 @@ option java_multiple_files = true;
 option java_package = "xyz.potter.showcase.budget.proto";
 option java_outer_classname = "BudgetProto";
 
+// Budget
 message Budgets {
   repeated Budget budget = 1;
 }
-
 message Budget {
   string id = 1;
   string title = 2;
 }
-
-
 service BudgetService {
   rpc findById (google.protobuf.StringValue) returns (Budget);
   rpc findAll (google.protobuf.Empty) returns (stream Budget);
@@ -25,21 +23,44 @@ service BudgetService {
   rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
 }
 
+// Category
 message Categories {
   repeated Category category = 1;
 }
-
 message Category {
   string id = 1;
   string title = 2;
   string budgetId = 3;
 }
-
-
 service CategoryService {
   rpc findById (google.protobuf.StringValue) returns (Category);
   rpc findByBudgetId (google.protobuf.StringValue) returns (stream Category);
   rpc create (Budget) returns (Category);
   rpc update (Budget) returns (Category);
+  rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
+}
+
+// Expense
+message Expenses {
+  repeated Expense expense = 1;
+}
+message Expense {
+  string id = 1;
+  string categoryId = 2;
+  int32 quadrant = 3;
+  bool fixed = 4;
+  string title = 5;
+  float high = 6;
+  float low = 7;
+  float amount = 8;
+  int32 calculateOn = 9;
+  bool enabled = 10;
+  int32 position = 11;
+}
+service ExpenseService {
+  rpc findById (google.protobuf.StringValue) returns (Expense);
+  rpc findByCategoryId (google.protobuf.StringValue) returns (stream Expense);
+  rpc create (Expense) returns (Expense);
+  rpc update (Expense) returns (Expense);
   rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
 }

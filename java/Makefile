@@ -5,11 +5,13 @@ build:
 stop:
 	docker compose down --remove-orphans
 
-run: build stop
-	docker compose run --service-ports -d mysql
-	docker compose run --service-ports -d redis
-	sleep 10
-	docker compose run --service-ports -d budget
+start: build stop
+	docker compose up -d
 
 test: 
 	cd budget-tests && mvn test
+
+make clean: stop
+	mvn clean
+
+make restart: start
