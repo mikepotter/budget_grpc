@@ -89,14 +89,21 @@ message Deductions {
   repeated Deduction deduction = 1;
 }
 message Deduction {
+  enum TaxableType {
+    TAXABLE_TYPE_FULLY = 0;
+    TAXABLE_TYPE_OSADI = 1;
+    TAXABLE_TYPE_NON = 2;
+  }
+
   string id = 1;
   string paycheckId = 2;
   string title = 3;
   float amount = 4;
   int32 calculateOn = 5;
-  int32 taxableType = 6;
+  TaxableType taxableType = 6;
   int32 position = 7;
   bool enabled = 8;
+
 }
 service DeductionService {
   rpc findById (google.protobuf.StringValue) returns (Deduction);
