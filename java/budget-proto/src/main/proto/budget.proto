@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "xyz.potter.showcase.budget.proto";
+option java_outer_classname = "BudgetProto";
+
+message Budgets {
+  repeated Budget budget = 1;
+}
+
+message Budget {
+  string id = 1;
+  string title = 2;
+}
+
+
+service BudgetService {
+  rpc findById (google.protobuf.StringValue) returns (Budget);
+  rpc findAll (google.protobuf.Empty) returns (stream Budget);
+  rpc create (Budget) returns (Budget);
+  rpc update (Budget) returns (Budget);
+  rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
+}
+
+message Categories {
+  repeated Category category = 1;
+}
+
+message Category {
+  string id = 1;
+  string title = 2;
+  string budgetId = 3;
+}
+
+
+service CategoryService {
+  rpc findById (google.protobuf.StringValue) returns (Category);
+  rpc findByBudgetId (google.protobuf.StringValue) returns (stream Category);
+  rpc create (Budget) returns (Category);
+  rpc update (Budget) returns (Category);
+  rpc delete (google.protobuf.StringValue) returns (google.protobuf.Empty);  
+}
